@@ -3,14 +3,6 @@
 #include <vector>
 #include <utility>
 
-int calculate_distance(int x, int y) {
-  int z = x - y;
-
-  if (z > 0) return z;
-
-  return -z;
-}
-
 int main() {
   std::vector<int> left_numbers;
   std::vector<int> right_numbers;
@@ -19,6 +11,7 @@ int main() {
   int pair_count = 1;
 
   std::cout << "Input 2 number each line, then Ctrl+D to continue." << std::endl;
+
   while (std::cin >> num1 >> num2) {
     left_numbers.push_back(num1);
     right_numbers.push_back(num2);
@@ -26,12 +19,15 @@ int main() {
     pair_count++;
   }
 
-  sort(left_numbers.begin(), left_numbers.end());
-  sort(right_numbers.begin(), right_numbers.end());
-
   std::vector<int> distances;
-  for (int i = 0; i < pair_count - 1; i++) {
-    distances.push_back(calculate_distance(left_numbers[i], right_numbers[i]));
+  for (int num : left_numbers) {
+    int count = 0;
+    for (int i : right_numbers) {
+      if (num == i) {
+        count++;
+      }
+    }
+    distances.push_back(num * count);
   }
 
   int total = 0;
